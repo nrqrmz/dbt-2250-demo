@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw_data_circle
+    loader: bigquery
+    database: hip-beaker-406013
+    description: Data from Circle (eco-responsible sportswear brand)
+    tables:
+      - name: funnel
+        identifier: raw_cc_funnel
+        description: Detailed data regarding Circle Funnel
+      - name: priority
+        identifier: raw_cc_funnel_priority
+        description: Detailed data regarding Circle Funnel Priority
+
+models:
+  - name: stg_raw__funnel
+    columns:
+      - name: company
+        description: Primary Key
+        tests:
+          - unique
+          - not_null
+      - name: date_lead
+        description: Lead date
+        tests:
+          - not_null
+  - name: stg_raw__priority
+    columns:
+      - name: company
+        description: Primary key
+        tests: [unique, not_null]
+      - name: priority
+        description: Priority
+        tests:
+          - accepted_values:
+              values: ['Low', 'Medium', 'High']
