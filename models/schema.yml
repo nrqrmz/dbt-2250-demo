@@ -3,6 +3,8 @@ version: 2
 sources:
   - name: raw
     schema: raw_data_circle
+    loader: bigquery
+    database: hip-beaker-406013
     description: Data from Circle (eco-responsible sportswear brand)
     tables:
       - name: funnel
